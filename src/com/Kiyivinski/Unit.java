@@ -1,6 +1,8 @@
 package com.Kiyivinski;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Unit extends Model {
     Unit(boolean verbose) {
@@ -13,5 +15,12 @@ public class Unit extends Model {
         columns.add("name");
         columns.add("code");
         return columns;
+    }
+
+    public void create(String name, String code) throws SQLException {
+        HashMap<String, String> columns = new HashMap<>();
+        columns.put("name", name);
+        columns.put("code", code);
+        super.create(columns);
     }
 }
