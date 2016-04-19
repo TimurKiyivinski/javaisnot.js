@@ -39,7 +39,7 @@ public class CLIDisplay extends Display{
 
     public void printHierarchy(ArrayList<String> hierarchy) {
         for (String s: hierarchy) {
-            this.prints(">>> " + s);
+            this.print(" > " + s);
         }
         this.line();
     }
