@@ -65,3 +65,6 @@ $RECYCLE.BIN/
 # IDE
 **/.idea/workspace.xml
 **/.idea/tasks.xml
+
+# MariaDB connector
+!/src/lib/mariadb-java-client-1.4.2.jar
