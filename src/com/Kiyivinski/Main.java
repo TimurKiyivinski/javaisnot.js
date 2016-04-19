@@ -199,7 +199,14 @@ public class Main {
                             } else if (Integer.parseInt(userInput) == INPUT_STUDENTS_VIEW) {
                                 programMenu = MENU_STUDENTS_VIEW;
                             } else if (Integer.parseInt(userInput) == INPUT_STUDENTS_DELETE) {
-                                // Delete Student
+                                myDisplay.printQuestion("Student ID:");
+                                myDisplay.printModel(student.all(), Student.getColumns());
+                                String inputID = myInput.getInput();
+
+                                if (student.find(inputID).isEmpty())
+                                    myDisplay.printError("The specified student does not exist.");
+                                else
+                                    student.delete(inputID);
                             } else if (Integer.parseInt(userInput) == INPUT_STUDENTS_BACK) {
                                 programMenu = MENU_MAIN;
                             }
