@@ -207,8 +207,11 @@ public class Main {
 
                                 if (student.find(inputID).isEmpty())
                                     myDisplay.printError("The specified student does not exist.");
-                                else
+                                else {
                                     student.delete(inputID);
+                                    studentUnit.delete("student_id", inputID);
+                                    studentAssessment.delete("student_id", inputID);
+                                }
                             }
                             /* Return to Main menu*/
                             else if (Integer.parseInt(userInput) == INPUT_STUDENTS_BACK) {
@@ -275,8 +278,11 @@ public class Main {
 
                                 if (unit.find(inputID).isEmpty())
                                     myDisplay.printError("The specified unit does not exist.");
-                                else
+                                else {
                                     unit.delete(inputID);
+                                    studentUnit.delete("unit_id", inputID);
+                                    unitAsseessment.delete("unit_id", inputID);
+                                }
                             }
                             /* Return to Main menu*/
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_BACK) {
@@ -359,9 +365,12 @@ public class Main {
                                 String inputID = myInput.getInput();
 
                                 if (semester.find(inputID).isEmpty())
-                                    myDisplay.printError("The specified unit does not exist.");
-                                else
+                                    myDisplay.printError("The specified semester does not exist.");
+                                else {
                                     semester.delete(inputID);
+                                    studentUnit.delete("semester_id", inputID);
+                                    assessment.delete("semester_id", inputID);
+                                }
                             }
                             /* Return to Main menu*/
                             else if (Integer.parseInt(userInput) == INPUT_SEMESTER_BACK) {

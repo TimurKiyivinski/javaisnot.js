@@ -47,4 +47,8 @@ public abstract class Model {
     public ArrayList<HashMap<String, String>> delete(String id) throws SQLException {
         return activeRecordModel.delete(id);
     }
+
+    public ArrayList<HashMap<String, String>> delete(String key, String value) throws SQLException {
+        return activeRecordModel.delete(key, value);
+    }
 }
