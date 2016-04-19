@@ -1,5 +1,7 @@
 package com.Kiyivinski;
 
+import java.util.ArrayList;
+
 public class Assessment {
     private Integer id;
     private String name;
@@ -13,5 +15,15 @@ public class Assessment {
         this.mark = mark;
         this.type_id = type_id;
         this.semester_id = semester_id;
+    }
+
+    static ArrayList<String> getColumns() {
+        ArrayList<String> columns = new ArrayList<>();
+        columns.add("id");
+        columns.add("name");
+        columns.add("mark");
+        columns.add("type_id");
+        columns.add("semester_id");
+        return columns;
     }
 }

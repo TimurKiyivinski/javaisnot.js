@@ -1,5 +1,7 @@
 package com.Kiyivinski;
 
+import java.util.ArrayList;
+
 public class Student {
     private Integer id;
     private String name;
@@ -11,6 +13,15 @@ public class Student {
         this.name = name;
         this.identification = identification;
         this.course_id = course_id;
+    }
+
+    static ArrayList<String> getColumns() {
+        ArrayList<String> columns = new ArrayList<>();
+        columns.add("id");
+        columns.add("name");
+        columns.add("identification");
+        columns.add("course_id");
+        return columns;
     }
 }
 
