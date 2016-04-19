@@ -287,23 +287,23 @@ public class Main {
                         case MENU_UNITS_SEMESTER:
                             /* Create Assessment under specific Semester */
                             if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_CREATE) {
-                                // Create Assessment
+                                // TODO:
                             }
                             /* Grade all Students based on an Assessment */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_GRADE) {
-                                // Grade students
+                                // TODO:
                             }
                             /* Generate Student performance report */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_REPORT) {
-                                // Generate report
+                                // TODO:
                             }
                             /* Add Student to Unit this Semester */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_ADD) {
-                                // Adds student
+                                // TODO:
                             }
                             /* Assign Student to Assessment this Semester */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_ASSIGN) {
-                                // Adds student
+                                // TODO:
                             }
                             /* Return to Unit menu */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_BACK) {
@@ -314,7 +314,10 @@ public class Main {
                         case MENU_COURSES:
                             /* Create Course */
                             if (Integer.parseInt(userInput) == INPUT_COURSES_CREATE) {
-                                // Create course
+                                myDisplay.printQuestion("Name:");
+                                String inputName = myInput.getInput();
+
+                                course.create(inputName);
                             }
                             /* Lists all Courses */
                             else if (Integer.parseInt(userInput) == INPUT_COURSES_VIEW) {
@@ -322,7 +325,14 @@ public class Main {
                             }
                             /* Delete Course */
                             else if (Integer.parseInt(userInput) == INPUT_COURSES_DELETE) {
-                                // Delete course
+                                myDisplay.printModel(course.all(), Course.getColumns());
+                                myDisplay.printQuestion("Course ID:");
+                                String inputID = myInput.getInput();
+
+                                if (course.find(inputID).isEmpty())
+                                    myDisplay.printError("The specified unit does not exist.");
+                                else
+                                    course.delete(inputID);
                             }
                             /* Return to Main menu*/
                             else if (Integer.parseInt(userInput) == INPUT_COURSES_BACK) {
@@ -333,7 +343,10 @@ public class Main {
                         case MENU_SEMESTER:
                             /* Create Semester */
                             if (Integer.parseInt(userInput) == INPUT_SEMESTER_CREATE) {
-                                // Create semester
+                                myDisplay.printQuestion("Name:");
+                                String inputName = myInput.getInput();
+
+                                semester.create(inputName);
                             }
                             /* Lists all Semesters */
                             else if (Integer.parseInt(userInput) == INPUT_SEMESTER_VIEW) {
@@ -341,7 +354,14 @@ public class Main {
                             }
                             /* Delete Semester */
                             else if (Integer.parseInt(userInput) == INPUT_SEMESTER_DELETE) {
-                                // Delete semester
+                                myDisplay.printModel(semester.all(), Semester.getColumns());
+                                myDisplay.printQuestion("Semester ID:");
+                                String inputID = myInput.getInput();
+
+                                if (semester.find(inputID).isEmpty())
+                                    myDisplay.printError("The specified unit does not exist.");
+                                else
+                                    semester.delete(inputID);
                             }
                             /* Return to Main menu*/
                             else if (Integer.parseInt(userInput) == INPUT_SEMESTER_BACK) {
