@@ -36,4 +36,27 @@ public class CLIDisplay extends Display{
             this.line();
         }
     }
+
+    public void printHierarchy(ArrayList<String> hierarchy) {
+        for (String s: hierarchy) {
+            this.prints(">>> " + s);
+        }
+        this.line();
+    }
+
+    public void printMenu(ArrayList<String> menu, boolean main) {
+        Integer count = 0;
+        for (int i = 0; i < menu.size(); i++) {
+            count = i + 1;
+            this.prints(count.toString());
+            this.println(menu.get(i));
+        }
+        count++;
+        this.prints(count.toString());
+        if (main)
+            this.println("Exit");
+        else
+            this.println("Back");
+        this.line();
+    }
 }
