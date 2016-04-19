@@ -36,7 +36,8 @@ public class Main {
     private static final int INPUT_UNITS_SEMESTER_CREATE = 1;
     private static final int INPUT_UNITS_SEMESTER_GRADE = 2;
     private static final int INPUT_UNITS_SEMESTER_REPORT = 3;
-    private static final int INPUT_UNITS_SEMESTER_BACK = 4;
+    private static final int INPUT_UNITS_SEMESTER_ADD = 4;
+    private static final int INPUT_UNITS_SEMESTER_BACK = 5;
 
     private static final int INPUT_COURSES_CREATE = 1;
     private static final int INPUT_COURSES_VIEW = 2;
@@ -52,39 +53,40 @@ public class Main {
         ArrayList<String> menu = new ArrayList<>();
         switch (id) {
             case MENU_MAIN:
-                menu.add("Students");       // 1
-                menu.add("Units");          // 2
-                menu.add("Courses");        // 3
-                menu.add("Semesters");      // 4
+                menu.add("Students");           // 1
+                menu.add("Units");              // 2
+                menu.add("Courses");            // 3
+                menu.add("Semesters");          // 4
                 break;
             case MENU_STUDENTS:
-                menu.add("Create");         // 1
-                menu.add("View");           // 2
-                menu.add("Delete");         // 3
+                menu.add("Create Student");     // 1
+                menu.add("View");               // 2
+                menu.add("Delete Student");     // 3
                 break;
             case MENU_STUDENTS_VIEW:
-                menu.add("Semester");       // 1
-                menu.add("Units");          // 2
+                menu.add("Semester");           // 1
+                menu.add("Units");              // 2
                 break;
             case MENU_UNITS:
-                menu.add("Create");         // 1
-                menu.add("Semester");       // 2
-                menu.add("Delete");         // 3
+                menu.add("Create Unit");        // 1
+                menu.add("Semester");           // 2
+                menu.add("Delete Unit");        // 3
                 break;
             case MENU_UNITS_SEMESTER:
-                menu.add("Create");         // 1
-                menu.add("Grade");          // 2
-                menu.add("Report");         // 3
+                menu.add("Create Assessment");  // 1
+                menu.add("Grade");              // 2
+                menu.add("Report");             // 3
+                menu.add("Add Unit");           // 4
                 break;
             case MENU_COURSES:
-                menu.add("Create");         // 1
-                menu.add("View");           // 2
-                menu.add("Delete");         // 3
+                menu.add("Create");             // 1
+                menu.add("View");               // 2
+                menu.add("Delete");             // 3
                 break;
             case MENU_SEMESTER:
-                menu.add("Create");         // 1
-                menu.add("View");           // 2
-                menu.add("Delete");         // 3
+                menu.add("Create");             // 1
+                menu.add("View");               // 2
+                menu.add("Delete");             // 3
                 break;
         }
         return menu;
@@ -217,12 +219,15 @@ public class Main {
                             // "Create"
                             // "Grade"
                             // "Report"
+                            // "Add"
                             if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_CREATE) {
                                 // Create assessment
                             } else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_GRADE) {
                                 // Grade students
                             } else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_REPORT) {
                                 // Generate report
+                            } else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_ADD) {
+                                // Adds student
                             } else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_BACK) {
                                 programMenu = MENU_UNITS;
                             }
