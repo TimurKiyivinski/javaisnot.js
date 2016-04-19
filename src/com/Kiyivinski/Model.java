@@ -43,4 +43,8 @@ public abstract class Model {
     protected ArrayList<HashMap<String, String>> update(Integer id, HashMap<String, String> pairs) throws SQLException {
         return activeRecordModel.update(id, pairs);
     }
+
+    public ArrayList<HashMap<String, String>> delete(String id) throws SQLException {
+        return activeRecordModel.delete(id);
+    }
 }
