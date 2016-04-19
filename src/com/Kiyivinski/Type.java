@@ -2,13 +2,9 @@ package com.Kiyivinski;
 
 import java.util.ArrayList;
 
-public class Type {
-    private Integer id;
-    private String name;
-
-    Type(Integer id, String name) {
-        this.id = id;
-        this.name = name;
+public class Type extends Model {
+    Type(boolean verbose) {
+        super(new ActiveRecordModel("types", Type.getColumns(), verbose));
     }
 
     static ArrayList<String> getColumns() {

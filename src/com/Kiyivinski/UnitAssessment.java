@@ -2,15 +2,9 @@ package com.Kiyivinski;
 
 import java.util.ArrayList;
 
-public class UnitAssessment {
-    private Integer id;
-    private Integer unit_id;
-    private Integer assessment_id;
-
-    UnitAssessment(Integer id, Integer unit_id, Integer assessment_id) {
-        this.id = id;
-        this.unit_id = unit_id;
-        this.assessment_id = assessment_id;
+public class UnitAssessment extends Model {
+    UnitAssessment(boolean verbose) {
+        super(new ActiveRecordModel("unit_assessments", UnitAssessment.getColumns(), verbose));
     }
 
     static ArrayList<String> getColumns() {

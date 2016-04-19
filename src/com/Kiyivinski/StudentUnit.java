@@ -2,17 +2,9 @@ package com.Kiyivinski;
 
 import java.util.ArrayList;
 
-public class StudentUnit {
-    private Integer id;
-    private Integer student_id;
-    private Integer unit_id;
-    private Integer semester_id;
-
-    StudentUnit(Integer id, Integer student_id, Integer unit_id, Integer semester_id) {
-        this.id = id;
-        this.student_id = student_id;
-        this.unit_id = unit_id;
-        this.semester_id = semester_id;
+public class StudentUnit extends Model {
+    StudentUnit(boolean verbose) {
+        super(new ActiveRecordModel("student_units", StudentUnit.getColumns(), verbose));
     }
 
     static ArrayList<String> getColumns() {

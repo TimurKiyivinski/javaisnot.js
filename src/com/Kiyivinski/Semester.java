@@ -2,13 +2,9 @@ package com.Kiyivinski;
 
 import java.util.ArrayList;
 
-public class Semester {
-    private Integer id;
-    private String name;
-
-    Semester(Integer id, String name) {
-        this.id = id;
-        this.name = name;
+public class Semester extends Model {
+    Semester(boolean verbose) {
+        super(new ActiveRecordModel("semesters", Semester.getColumns(), verbose));
     }
 
     static ArrayList<String> getColumns() {

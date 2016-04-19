@@ -2,15 +2,9 @@ package com.Kiyivinski;
 
 import java.util.ArrayList;
 
-public class Unit {
-    private Integer id;
-    private String name;
-    private String code;
-
-    Unit(Integer id, String name, String code) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
+public class Unit extends Model {
+    Unit(boolean verbose) {
+        super(new ActiveRecordModel("units", Unit.getColumns(), verbose));
     }
 
     static ArrayList<String> getColumns() {

@@ -2,17 +2,9 @@ package com.Kiyivinski;
 
 import java.util.ArrayList;
 
-public class Student {
-    private Integer id;
-    private String name;
-    private String identification;
-    private Integer course_id;
-
-    Student(Integer id, String name, String identification, Integer course_id) {
-        this.id = id;
-        this.name = name;
-        this.identification = identification;
-        this.course_id = course_id;
+public class Student extends Model {
+    Student(boolean verbose) {
+        super(new ActiveRecordModel("students", Student.getColumns(), verbose));
     }
 
     static ArrayList<String> getColumns() {
