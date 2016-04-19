@@ -24,6 +24,10 @@ public class CLIDisplay extends Display{
         System.err.println(error);
     }
 
+    public void printQuestion(String question) {
+        this.println(question);
+    }
+
     public void printModel(ArrayList<HashMap<String, String>> records, ArrayList<String> columns) {
         for (String column: columns) {
             this.prints(column);

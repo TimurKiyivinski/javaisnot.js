@@ -176,12 +176,26 @@ public class Main {
                             else if (Integer.parseInt(userInput) == INPUT_MAIN_EXIT)
                                 programRunning = false;
                             break;
+
                         case MENU_STUDENTS:
                             // "Create"
                             // "View"
                             // "Delete"
                             if (Integer.parseInt(userInput) == INPUT_STUDENTS_CREATE) {
-                                // Create Student
+                                myDisplay.printQuestion("Name:");
+                                String inputName = myInput.getInput();
+
+                                myDisplay.printQuestion("ID:");
+                                String inputID = myInput.getInput();
+
+                                myDisplay.printQuestion("Course ID:");
+                                myDisplay.printModel(course.all(), Course.getColumns());
+                                String inputCourse = myInput.getInput();
+
+                                if (course.find(inputCourse).isEmpty())
+                                    myDisplay.printError("No such course");
+                                else
+                                    student.create(inputName, inputID, inputCourse);
                             } else if (Integer.parseInt(userInput) == INPUT_STUDENTS_VIEW) {
                                 programMenu = MENU_STUDENTS_VIEW;
                             } else if (Integer.parseInt(userInput) == INPUT_STUDENTS_DELETE) {
@@ -190,6 +204,7 @@ public class Main {
                                 programMenu = MENU_MAIN;
                             }
                             break;
+
                         case MENU_STUDENTS_VIEW:
                             // "Semester"
                             // "Units"
@@ -201,6 +216,7 @@ public class Main {
                                 programMenu = MENU_STUDENTS;
                             }
                             break;
+
                         case MENU_UNITS:
                             // "Create"
                             // "Semester"
@@ -215,6 +231,7 @@ public class Main {
                                 programMenu = MENU_MAIN;
                             }
                             break;
+
                         case MENU_UNITS_SEMESTER:
                             // "Create"
                             // "Grade"
@@ -232,6 +249,7 @@ public class Main {
                                 programMenu = MENU_UNITS;
                             }
                             break;
+
                         case MENU_COURSES:
                             // "Create"
                             // "View"
@@ -239,13 +257,14 @@ public class Main {
                             if (Integer.parseInt(userInput) == INPUT_COURSES_CREATE) {
                                 // Create course
                             } else if (Integer.parseInt(userInput) == INPUT_COURSES_VIEW) {
-                                // View courses
+                                myDisplay.printModel(course.all(), Course.getColumns());
                             } else if (Integer.parseInt(userInput) == INPUT_COURSES_DELETE) {
                                 // Delete course
                             } else if (Integer.parseInt(userInput) == INPUT_COURSES_BACK) {
                                 programMenu = MENU_MAIN;
                             }
                             break;
+
                         case MENU_SEMESTER:
                             // "Create"
                             // "View"
@@ -253,7 +272,7 @@ public class Main {
                             if (Integer.parseInt(userInput) == INPUT_SEMESTER_CREATE) {
                                 // Create semester
                             } else if (Integer.parseInt(userInput) == INPUT_SEMESTER_VIEW) {
-                                // View semesters
+                                myDisplay.printModel(semester.all(), Semester.getColumns());
                             } else if (Integer.parseInt(userInput) == INPUT_SEMESTER_DELETE) {
                                 // Delete semester
                             } else if (Integer.parseInt(userInput) == INPUT_SEMESTER_BACK) {
@@ -261,18 +280,7 @@ public class Main {
                             }
                             break;
                     }
-                    /*
-                    myDisplay.printModel(course.all(), Course.getColumns());
-                    myDisplay.printModel(student.all(), Student.getColumns());
-                    myDisplay.printModel(unit.all(), Unit.getColumns());
-                    myDisplay.printModel(semester.all(), Semester.getColumns());
-                    myDisplay.printModel(assessment.all(), Assessment.getColumns());
-                    myDisplay.printModel(type.all(), Type.getColumns());
-                    myDisplay.printModel(studentUnit.all(), StudentUnit.getColumns());
-                    myDisplay.printModel(studentAssessment.all(), StudentAssessment.getColumns());
-                    myDisplay.printModel(unitAsseessment.all(), UnitAssessment.getColumns());
-                    */
-                } catch (Exception e) {
+                } catch (SQLException e) {
                     myDisplay.printError("SQL Error occurred");
                     programRunning = false;
                 }
