@@ -29,9 +29,10 @@ public class Main {
     private static final int INPUT_STUDENTS_VIEW_BACK= 3;
 
     private static final int INPUT_UNITS_CREATE = 1;
-    private static final int INPUT_UNITS_SEMESTER = 2;
-    private static final int INPUT_UNITS_DELETE = 3;
-    private static final int INPUT_UNITS_BACK = 4;
+    private static final int INPUT_UNITS_VIEW = 2;
+    private static final int INPUT_UNITS_SEMESTER = 3;
+    private static final int INPUT_UNITS_DELETE = 4;
+    private static final int INPUT_UNITS_BACK = 5;
 
     private static final int INPUT_UNITS_SEMESTER_CREATE = 1;
     private static final int INPUT_UNITS_SEMESTER_GRADE = 2;
@@ -69,8 +70,9 @@ public class Main {
                 break;
             case MENU_UNITS:
                 menu.add("Create Unit");        // 1
-                menu.add("Semester");           // 2
-                menu.add("Delete Unit");        // 3
+                menu.add("View");               // 2
+                menu.add("Semester");           // 3
+                menu.add("Delete Unit");        // 4
                 break;
             case MENU_UNITS_SEMESTER:
                 menu.add("Create Assessment");  // 1
@@ -226,14 +228,33 @@ public class Main {
 
                         case MENU_UNITS:
                             // "Create"
+                            // "View"
                             // "Semester"
                             // "Delete"
                             if (Integer.parseInt(userInput) == INPUT_UNITS_CREATE) {
-                                // Create unit
+                                myDisplay.printQuestion("Name:");
+                                String inputName = myInput.getInput();
+
+                                myDisplay.printQuestion("Code:");
+                                String inputCode = myInput.getInput();
+
+                                if (unit.where("code", inputCode).isEmpty())
+                                    unit.create(inputName, inputCode);
+                                else
+                                    myDisplay.printError("A unit with that code already exists.");
+                            } else if (Integer.parseInt(userInput) == INPUT_UNITS_VIEW) {
+                                myDisplay.printModel(unit.all(), Unit.getColumns());
                             } else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER) {
                                 programMenu = MENU_UNITS_SEMESTER;
                             } else if (Integer.parseInt(userInput) == INPUT_UNITS_DELETE) {
-                                // Delete unit
+                                myDisplay.printModel(unit.all(), Unit.getColumns());
+                                myDisplay.printQuestion("Unit ID:");
+                                String inputID = myInput.getInput();
+
+                                if (unit.find(inputID).isEmpty())
+                                    myDisplay.printError("The specified unit does not exist.");
+                                else
+                                    unit.delete(inputID);
                             } else if (Integer.parseInt(userInput) == INPUT_UNITS_BACK) {
                                 programMenu = MENU_MAIN;
                             }
