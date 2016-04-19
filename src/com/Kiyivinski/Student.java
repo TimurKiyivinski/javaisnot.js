@@ -30,5 +30,15 @@ public class Student extends Model {
        this.create(name, identification, course_id.toString());
     }
 
+    public ArrayList<HashMap<String, String>> whereUnit(String id) throws SQLException {
+        String sql = "SELECT DISTINCT students.* FROM students INNER JOIN student_units ON students.id = student_units.student_id AND student_units.unit_id = " + id;
+        return super.query(sql);
+    }
+
+    public ArrayList<HashMap<String, String>> whereSemester(String id) throws SQLException {
+        String sql = "SELECT DISTINCT students.* FROM students INNER JOIN student_units ON students.id = student_units.student_id AND student_units.semester_id = " + id;
+        return super.query(sql);
+    }
+
 }
 

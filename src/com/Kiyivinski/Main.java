@@ -163,10 +163,6 @@ public class Main {
 
                     switch (programMenu) {
                         case MENU_MAIN:
-                            // "Students"
-                            // "Units"
-                            // "Courses"
-                            // "Semesters"
                             if (Integer.parseInt(userInput) == INPUT_MAIN_STUDENTS)
                                 programMenu = MENU_STUDENTS;
                             else if (Integer.parseInt(userInput) == INPUT_MAIN_UNITS)
@@ -180,9 +176,6 @@ public class Main {
                             break;
 
                         case MENU_STUDENTS:
-                            // "Create"
-                            // "View"
-                            // "Delete"
                             if (Integer.parseInt(userInput) == INPUT_STUDENTS_CREATE) {
                                 myDisplay.printQuestion("Name:");
                                 String inputName = myInput.getInput();
@@ -215,22 +208,30 @@ public class Main {
                             break;
 
                         case MENU_STUDENTS_VIEW:
-                            // "Semester"
-                            // "Units"
                             if (Integer.parseInt(userInput) == INPUT_STUDENTS_VIEW_SEMESTER) {
-                                // View students by semester
+                                myDisplay.printQuestion("Semester ID:");
+                                myDisplay.printModel(semester.all(), Semester.getColumns());
+                                String inputID = myInput.getInput();
+
+                                if (semester.find(inputID).isEmpty())
+                                    myDisplay.printError("The specified semester does not exist.");
+                                else
+                                    myDisplay.printModel(student.whereSemester(inputID), Student.getColumns());
                             } else if (Integer.parseInt(userInput) == INPUT_STUDENTS_VIEW_UNITS) {
-                                // View students by units
+                                myDisplay.printQuestion("Unit ID:");
+                                myDisplay.printModel(unit.all(), Unit.getColumns());
+                                String inputID = myInput.getInput();
+
+                                if (unit.find(inputID).isEmpty())
+                                    myDisplay.printError("The specified unit does not exist.");
+                                else
+                                    myDisplay.printModel(student.whereUnit(inputID), Student.getColumns());
                             } else if (Integer.parseInt(userInput) == INPUT_STUDENTS_VIEW_BACK) {
                                 programMenu = MENU_STUDENTS;
                             }
                             break;
 
                         case MENU_UNITS:
-                            // "Create"
-                            // "View"
-                            // "Semester"
-                            // "Delete"
                             if (Integer.parseInt(userInput) == INPUT_UNITS_CREATE) {
                                 myDisplay.printQuestion("Name:");
                                 String inputName = myInput.getInput();
@@ -261,10 +262,6 @@ public class Main {
                             break;
 
                         case MENU_UNITS_SEMESTER:
-                            // "Create"
-                            // "Grade"
-                            // "Report"
-                            // "Add"
                             if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_CREATE) {
                                 // Create assessment
                             } else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_GRADE) {
@@ -279,9 +276,6 @@ public class Main {
                             break;
 
                         case MENU_COURSES:
-                            // "Create"
-                            // "View"
-                            // "Delete"
                             if (Integer.parseInt(userInput) == INPUT_COURSES_CREATE) {
                                 // Create course
                             } else if (Integer.parseInt(userInput) == INPUT_COURSES_VIEW) {
@@ -294,9 +288,6 @@ public class Main {
                             break;
 
                         case MENU_SEMESTER:
-                            // "Create"
-                            // "View"
-                            // "Delete"
                             if (Integer.parseInt(userInput) == INPUT_SEMESTER_CREATE) {
                                 // Create semester
                             } else if (Integer.parseInt(userInput) == INPUT_SEMESTER_VIEW) {
