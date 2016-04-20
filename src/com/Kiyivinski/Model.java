@@ -42,6 +42,10 @@ public abstract class Model {
         return activeRecordModel.where(key, value);
     }
 
+    public ArrayList<HashMap<String, String>> where(HashMap<String, String> pairs) throws SQLException {
+        return activeRecordModel.where(pairs);
+    }
+
     protected ArrayList<HashMap<String, String>> create(HashMap<String, String> pairs) throws SQLException {
         return activeRecordModel.create(pairs);
     }

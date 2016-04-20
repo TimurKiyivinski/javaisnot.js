@@ -33,4 +33,14 @@ public class StudentAssessment extends Model {
     void create(Integer student_id, Integer assessment_id) throws SQLException {
         this.create(student_id.toString(), assessment_id.toString());
     }
+
+    void assign(String assessmentID, String semesterID, String unitID, StudentUnit studentUnit)  throws SQLException {
+        HashMap<String, String> constraints = new HashMap<>();
+        constraints.put("unit_id", unitID);
+        constraints.put("semester_id", semesterID);
+        ArrayList<HashMap<String, String>> students = studentUnit.where(constraints);
+        for(HashMap<String, String> student: students) {
+            this.create(assessmentID, student.get("student_id"));
+        }
+    }
 }

@@ -331,6 +331,7 @@ public class Main {
                                 else {
                                     assessment.create(name, mark, typeID, currentSemester);
                                     unitAsseessment.create(currentUnit, assessment.last().toString());
+                                    studentAssessment.assign(unitAsseessment.last().toString(), currentSemester, currentUnit, studentUnit);
                                 }
                             }
                             /* Grade all Students based on an Assessment */
@@ -343,7 +344,15 @@ public class Main {
                             }
                             /* Add Student to Unit this Semester */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_ADD) {
-                                // TODO:
+                                myDisplay.printQuestion("Student ID:");
+                                myDisplay.printModel(student.all(), Student.getColumns());
+                                String inputID = myInput.getInput();
+
+                                if (student.find(inputID).isEmpty())
+                                    myDisplay.printError("The specified student does not exist.");
+                                else {
+                                    studentUnit.create(inputID, currentUnit, currentSemester);
+                                }
                             }
                             /* Assign Student to Assessment this Semester */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_ASSIGN) {
