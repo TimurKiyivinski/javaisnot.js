@@ -45,4 +45,15 @@ public class StudentAssessment extends Model {
             this.create(student.get("student_id"), assessmentID);
         }
     }
+
+    void grade(String mark, String studentID, String assessmentID) throws SQLException {
+        HashMap<String, String> constraints = new HashMap<>();
+        constraints.put("student_id", studentID);
+        constraints.put("assessment_id", assessmentID);
+        ArrayList<HashMap<String, String>> results = this.where(constraints);
+        HashMap<String, String> pairs = results.get(0);
+        pairs.put("mark", mark);
+        this.update(Integer.parseInt(pairs.get("id")), pairs);
+
+    }
 }

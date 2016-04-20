@@ -46,7 +46,7 @@ public class Assessment extends Model {
 
         for (HashMap<String, String> assessment: assessments) {
             for (HashMap<String, String> unit : units) {
-                if (assessment.get("id") == unit.get("unit_id")) {
+                if (assessment.get("id").equals(unit.get("assessment_id"))) {
                     results.add(assessment);
                 }
             }

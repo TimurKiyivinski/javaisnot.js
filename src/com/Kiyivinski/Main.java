@@ -8,6 +8,7 @@ package com.Kiyivinski;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
     private static final int MENU_MAIN = 0;
@@ -335,7 +336,26 @@ public class Main {
                             }
                             /* Grade all Students based on an Assessment */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_GRADE) {
-                                // TODO:
+                                myDisplay.printModel(assessment.whereUnitSemester(currentUnit, currentSemester, unitAssessment), Assessment.getColumns());
+                                myDisplay.printQuestion("Assessment ID:");
+                                String inputID = myInput.getInput();
+
+                                if (assessment.find(inputID).isEmpty())
+                                    myDisplay.printError("The specified assessment does not exist");
+                                else {
+                                    HashMap<String, String> constraints = new HashMap<>();
+                                    constraints.put("unit_id", currentUnit);
+                                    constraints.put("semester_id", currentSemester);
+                                    ArrayList<HashMap<String, String>> studentsUnits = studentUnit.where(constraints);
+                                    for (HashMap<String, String> pair: studentsUnits) {
+                                        myDisplay.printModel(student.find(pair.get("student_id")), Type.getColumns());
+                                        myDisplay.printQuestion("Grade:");
+                                        String grade = myInput.getInput();
+
+                                        studentAssessment.grade(grade, pair.get("student_id"), inputID);
+
+                                    }
+                                }
                             }
                             /* Generate Student performance report */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_REPORT) {
@@ -360,7 +380,7 @@ public class Main {
                                 String studentID = myInput.getInput();
 
                                 myDisplay.printQuestion("Assessment ID:");
-                                myDisplay.printModel(assessment.whereUnitSemester(currentUnit, currentSemester, unitAssessment), Student.getColumns());
+                                myDisplay.printModel(assessment.whereUnitSemester(currentUnit, currentSemester, unitAssessment), Assessment.getColumns());
                                 String assessmentID = myInput.getInput();
 
                                 if (student.find(studentID).isEmpty() || assessment.find(assessmentID).isEmpty())
