@@ -58,6 +58,11 @@ public class Main {
     private static final int INPUT_SEMESTER_DELETE = 3;
     private static final int INPUT_SEMESTER_BACK = 4;
 
+    /**
+     * Generates menu instance based on id
+     * @param id
+     * @return
+     */
     public static ArrayList<String> getMenu(int id) {
         ArrayList<String> menu = new ArrayList<>();
         switch (id) {
@@ -104,6 +109,11 @@ public class Main {
         return menu;
     }
 
+    /**
+     * Generates Hierarchy instance based on ID
+     * @param id
+     * @return
+     */
     public static ArrayList<String> getHierarchy(int id) {
         ArrayList<String> hierarchy = new ArrayList<>();
         switch (id) {
@@ -361,30 +371,7 @@ public class Main {
                             }
                             /* Generate Student performance report */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_REPORT) {
-                                // Get all assessments
-                                ArrayList<HashMap<String, String>> assessments = assessment.whereUnitSemester(currentUnit, currentSemester, unitAssessment);
-
-                                // Get all student units
-                                HashMap<String, String> constraints = new HashMap<>();
-                                constraints.put("unit_id", currentUnit);
-                                constraints.put("semester_id", currentSemester);
-                                ArrayList<HashMap<String, String>> studentsUnits = studentUnit.where(constraints);
-
-                                // Grades
-                                ArrayList<Grade> grades = new ArrayList<>();
-
-                                for (HashMap<String, String> pair: studentsUnits) {
-                                    HashMap<String, String> currentStudent = student.find(pair.get("student_id")).get(0);
-                                    Grade grade = new Grade(currentStudent.get("identification"), currentStudent.get("name"));
-
-                                    for (HashMap<String, String> assessmentInstance: assessments) {
-
-                                    }
-
-                                    // Add grade
-                                    grades.add(grade);
-                                }
-
+                                myDisplay.printQuestion("Not implemented");
                             }
                             /* Add Student to Unit this Semester */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_ADD) {

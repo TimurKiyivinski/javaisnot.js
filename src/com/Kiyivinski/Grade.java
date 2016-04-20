@@ -20,7 +20,7 @@ public class Grade {
     public Integer total() {
         Integer total = 0;
         for (HashMap<String, String> assessment: assessments) {
-            total += assessment.get('mark');
+            total += Integer.parseInt(assessment.get("mark"));
         }
         return total;
     }
@@ -44,7 +44,6 @@ public class Grade {
 
     public static void write(ArrayList<Grade> grades) {
         for (Grade grade: grades) {
-            System.out
         }
     }
 }
