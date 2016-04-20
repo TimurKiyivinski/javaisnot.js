@@ -20,6 +20,7 @@ public class StudentAssessment extends Model {
         columns.add("id");
         columns.add("student_id");
         columns.add("assessment_id");
+        columns.add("mark");
         return columns;
     }
 
@@ -27,6 +28,7 @@ public class StudentAssessment extends Model {
         HashMap<String, String> columns = new HashMap<>();
         columns.put("student_id", student_id);
         columns.put("assessment_id", assessment_id);
+        columns.put("mark", "0");
         super.create(columns);
     }
 
@@ -39,8 +41,8 @@ public class StudentAssessment extends Model {
         constraints.put("unit_id", unitID);
         constraints.put("semester_id", semesterID);
         ArrayList<HashMap<String, String>> students = studentUnit.where(constraints);
-        for(HashMap<String, String> student: students) {
-            this.create(assessmentID, student.get("student_id"));
+        for (HashMap<String, String> student: students) {
+            this.create(student.get("student_id"), assessmentID);
         }
     }
 }

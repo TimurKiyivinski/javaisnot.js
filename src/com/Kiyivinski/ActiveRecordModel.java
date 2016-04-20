@@ -152,10 +152,10 @@ public class ActiveRecordModel {
         try {
             String sql = "SELECT * from " + this.table + " where ";
             for (String key: pairs.keySet()) {
-                sql += "`" + key + "`, ";
-                sql += "'" + pairs.get(key) + "', ";
+                sql += key + "=";
+                sql += pairs.get(key) + " AND ";
             }
-            sql = sql.substring(0, sql.length() - 2);
+            sql = sql.substring(0, sql.length() - 5) + ";";
             ArrayList<HashMap<String, String>> results = this.get(sql);
             return results;
 
@@ -176,7 +176,6 @@ public class ActiveRecordModel {
             }
             values = values.substring(0, values.length() - 2) + ");";
             sql = sql.substring(0, sql.length() - 2) + ") VALUES " + values;
-            System.out.println(sql);
             ArrayList<HashMap<String, String>> results = this.get(sql);
             return results;
 
@@ -196,7 +195,6 @@ public class ActiveRecordModel {
             }
             values = values.substring(0, values.length() - 2);
             sql += values + " WHERE ID='" + id.toString() + "'";
-            System.out.println(sql);
             ArrayList<HashMap<String, String>> results = this.get(sql);
             return results;
 

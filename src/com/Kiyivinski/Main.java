@@ -8,7 +8,6 @@ package com.Kiyivinski;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Main {
     private static final int MENU_MAIN = 0;
@@ -139,7 +138,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        boolean verbose = false;
+        boolean verbose = true;
 
         Course course = new Course(verbose);
         Student student = new Student(verbose);
@@ -149,7 +148,7 @@ public class Main {
         Type type = new Type(verbose);
         StudentUnit studentUnit = new StudentUnit(verbose);
         StudentAssessment studentAssessment = new StudentAssessment(verbose);
-        UnitAssessment unitAsseessment = new UnitAssessment(verbose);
+        UnitAssessment unitAssessment = new UnitAssessment(verbose);
 
         Display myDisplay = new CLIDisplay();
         Input myInput = new CLIInput();
@@ -304,7 +303,7 @@ public class Main {
                                 else {
                                     unit.delete(inputID);
                                     studentUnit.delete("unit_id", inputID);
-                                    unitAsseessment.delete("unit_id", inputID);
+                                    unitAssessment.delete("unit_id", inputID);
                                 }
                             }
                             /* Return to Main menu*/
@@ -330,8 +329,8 @@ public class Main {
                                     myDisplay.printError("The specified assessment type does not exist");
                                 else {
                                     assessment.create(name, mark, typeID, currentSemester);
-                                    unitAsseessment.create(currentUnit, assessment.last().toString());
-                                    studentAssessment.assign(unitAsseessment.last().toString(), currentSemester, currentUnit, studentUnit);
+                                    unitAssessment.create(currentUnit, assessment.last().toString());
+                                    studentAssessment.assign(unitAssessment.last().toString(), currentSemester, currentUnit, studentUnit);
                                 }
                             }
                             /* Grade all Students based on an Assessment */
@@ -356,7 +355,19 @@ public class Main {
                             }
                             /* Assign Student to Assessment this Semester */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_ASSIGN) {
-                                // TODO:
+                                myDisplay.printQuestion("Student ID:");
+                                myDisplay.printModel(student.all(), Student.getColumns());
+                                String studentID = myInput.getInput();
+
+                                myDisplay.printQuestion("Assessment ID:");
+                                myDisplay.printModel(assessment.whereUnitSemester(currentUnit, currentSemester, unitAssessment), Student.getColumns());
+                                String assessmentID = myInput.getInput();
+
+                                if (student.find(studentID).isEmpty() || assessment.find(assessmentID).isEmpty())
+                                    myDisplay.printError("The specified student or assessment does not exist.");
+                                else {
+                                    studentAssessment.create(studentID, assessmentID);
+                                }
                             }
                             /* Return to Unit menu */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_BACK) {
