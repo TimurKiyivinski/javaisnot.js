@@ -36,7 +36,7 @@ public class StudentAssessment extends Model {
         this.create(student_id.toString(), assessment_id.toString());
     }
 
-    void assign(String assessmentID, String semesterID, String unitID, StudentUnit studentUnit)  throws SQLException {
+    public void assign(String assessmentID, String semesterID, String unitID, StudentUnit studentUnit)  throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put("unit_id", unitID);
         constraints.put("semester_id", semesterID);
@@ -46,7 +46,7 @@ public class StudentAssessment extends Model {
         }
     }
 
-    void grade(String mark, String studentID, String assessmentID) throws SQLException {
+    public void grade(String mark, String studentID, String assessmentID) throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put("student_id", studentID);
         constraints.put("assessment_id", assessmentID);
@@ -54,6 +54,14 @@ public class StudentAssessment extends Model {
         HashMap<String, String> pairs = results.get(0);
         pairs.put("mark", mark);
         this.update(Integer.parseInt(pairs.get("id")), pairs);
+    }
 
+    public String getGrade(String mark, String studentID, String assessmentID) throws SQLException {
+        HashMap<String, String> constraints = new HashMap<>();
+        constraints.put("student_id", studentID);
+        constraints.put("assessment_id", assessmentID);
+        ArrayList<HashMap<String, String>> results = this.where(constraints);
+        HashMap<String, String> pairs = results.get(0);
+        return pairs.get("mark");
     }
 }

@@ -350,7 +350,7 @@ public class Main {
                                     constraints.put("semester_id", currentSemester);
                                     ArrayList<HashMap<String, String>> studentsUnits = studentUnit.where(constraints);
                                     for (HashMap<String, String> pair: studentsUnits) {
-                                        myDisplay.printModel(student.find(pair.get("student_id")), Type.getColumns());
+                                        myDisplay.printModel(student.find(pair.get("student_id")), Student.getColumns());
                                         myDisplay.printQuestion("Grade:");
                                         String grade = myInput.getInput();
 
@@ -361,7 +361,30 @@ public class Main {
                             }
                             /* Generate Student performance report */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_REPORT) {
-                                // TODO:
+                                // Get all assessments
+                                ArrayList<HashMap<String, String>> assessments = assessment.whereUnitSemester(currentUnit, currentSemester, unitAssessment);
+
+                                // Get all student units
+                                HashMap<String, String> constraints = new HashMap<>();
+                                constraints.put("unit_id", currentUnit);
+                                constraints.put("semester_id", currentSemester);
+                                ArrayList<HashMap<String, String>> studentsUnits = studentUnit.where(constraints);
+
+                                // Grades
+                                ArrayList<Grade> grades = new ArrayList<>();
+
+                                for (HashMap<String, String> pair: studentsUnits) {
+                                    HashMap<String, String> currentStudent = student.find(pair.get("student_id")).get(0);
+                                    Grade grade = new Grade(currentStudent.get("identification"), currentStudent.get("name"));
+
+                                    for (HashMap<String, String> assessmentInstance: assessments) {
+
+                                    }
+
+                                    // Add grade
+                                    grades.add(grade);
+                                }
+
                             }
                             /* Add Student to Unit this Semester */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_ADD) {
