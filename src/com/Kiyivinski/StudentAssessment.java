@@ -11,10 +11,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StudentAssessment extends Model {
+    /**
+     * Resource Model for student_assessments
+     * @param verbose  Enable debugging
+     */
     StudentAssessment(boolean verbose) {
         super(new ActiveRecordModel("student_assessments", StudentAssessment.getColumns(), verbose));
     }
 
+    /**
+     * Gets all columns in resource
+     * @return Columns as a list
+     */
     static ArrayList<String> getColumns() {
         ArrayList<String> columns = new ArrayList<>();
         columns.add("id");
@@ -24,6 +32,12 @@ public class StudentAssessment extends Model {
         return columns;
     }
 
+    /**
+     * Create resource instance
+     * @param student_id Resource student ID
+     * @param assessment_id Resource assessment ID
+     * @throws SQLException
+     */
     void create(String student_id, String assessment_id) throws SQLException {
         HashMap<String, String> columns = new HashMap<>();
         columns.put("student_id", student_id);
@@ -32,10 +46,24 @@ public class StudentAssessment extends Model {
         super.create(columns);
     }
 
+    /**
+     * Create resource instance
+     * @param student_id Resource student ID
+     * @param assessment_id Resource assessment ID
+     * @throws SQLException
+     */
     void create(Integer student_id, Integer assessment_id) throws SQLException {
         this.create(student_id.toString(), assessment_id.toString());
     }
 
+    /**
+     * Assigns assessment to students
+     * @param assessmentID Assessment ID
+     * @param semesterID Semester ID
+     * @param unitID Unit ID
+     * @param studentUnit student_units Model
+     * @throws SQLException
+     */
     public void assign(String assessmentID, String semesterID, String unitID, StudentUnit studentUnit)  throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put("unit_id", unitID);
@@ -46,6 +74,13 @@ public class StudentAssessment extends Model {
         }
     }
 
+    /**
+     * Grades a student by updating resource
+     * @param mark Student mark
+     * @param studentID Student ID
+     * @param assessmentID Assessment ID
+     * @throws SQLException
+     */
     public void grade(String mark, String studentID, String assessmentID) throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put("student_id", studentID);
@@ -56,6 +91,14 @@ public class StudentAssessment extends Model {
         this.update(Integer.parseInt(pairs.get("id")), pairs);
     }
 
+    /**
+     * Gets a student's grade
+     * @param mark Student Mark
+     * @param studentID Student ID
+     * @param assessmentID Assessment ID
+     * @return
+     * @throws SQLException
+     */
     public String getGrade(String mark, String studentID, String assessmentID) throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put("student_id", studentID);

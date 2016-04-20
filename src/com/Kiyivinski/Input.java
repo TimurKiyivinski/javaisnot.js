@@ -7,5 +7,9 @@
 package com.Kiyivinski;
 
 public abstract class Input {
+    /**
+     * Get user input
+     * @return user input as a string
+     */
     public abstract String getInput();
 }

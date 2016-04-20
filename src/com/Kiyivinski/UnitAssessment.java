@@ -11,10 +11,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UnitAssessment extends Model {
+    /**
+     * Resource Model for unit_assessments
+     * @param verbose  Enable debugging
+     */
     UnitAssessment(boolean verbose) {
         super(new ActiveRecordModel("unit_assessments", UnitAssessment.getColumns(), verbose));
     }
 
+    /**
+     * Gets all columns in resource
+     * @return Columns as a list
+     */
     static ArrayList<String> getColumns() {
         ArrayList<String> columns = new ArrayList<>();
         columns.add("id");
@@ -23,6 +31,12 @@ public class UnitAssessment extends Model {
         return columns;
     }
 
+    /**
+     * Creates resource instance
+     * @param unit_id Resource Unit ID
+     * @param assessment_id Resource Assessment ID
+     * @throws SQLException
+     */
     public void create(String unit_id, String assessment_id) throws SQLException {
         HashMap<String, String> columns = new HashMap<>();
         columns.put("unit_id", unit_id);
@@ -30,6 +44,12 @@ public class UnitAssessment extends Model {
         super.create(columns);
     }
 
+    /**
+     * Creates resource instance
+     * @param unit_id Resource Unit ID
+     * @param assessment_id Resource Assessment ID
+     * @throws SQLException
+     */
     public void create(Integer unit_id, Integer assessment_id) throws SQLException {
         this.create(unit_id.toString(), assessment_id.toString());
     }

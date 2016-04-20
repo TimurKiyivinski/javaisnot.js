@@ -10,18 +10,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CLIDisplay extends Display{
+    /**
+     * Prints a string
+     * @param s String to print
+     */
     public void print(String s) {
         System.out.print(s);
     }
 
+    /**
+     * Prints a string separated by a tab
+     * @param s String to print
+     */
     public void prints(String s) {
         this.print(s + "\t");
     }
 
+    /**
+     * Prints a string onto a line
+     * @param s String to print
+     */
     public void println(String s) {
         System.out.println(s);
     }
 
+    /**
+     * Prints a new line
+     */
     public void line() {
         this.println("");
     }

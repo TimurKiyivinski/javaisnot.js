@@ -11,10 +11,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Assessment extends Model {
+    /**
+     * Resource Model for assessments
+     * @param verbose Enable debugging
+     */
     Assessment(boolean verbose) {
         super(new ActiveRecordModel("assessments", Assessment.getColumns(), verbose));
     }
 
+    /**
+     * Gets all columns in resource
+     * @return Columns as a list
+     */
     static ArrayList<String> getColumns() {
         ArrayList<String> columns = new ArrayList<>();
         columns.add("id");
@@ -25,6 +33,14 @@ public class Assessment extends Model {
         return columns;
     }
 
+    /**
+     * Creates a resource instance
+     * @param name Resource name
+     * @param mark Resource marks
+     * @param type_id Resource type
+     * @param semester_id Resource semester
+     * @throws SQLException
+     */
     public void create(String name, String mark, String type_id, String semester_id) throws SQLException {
         HashMap<String, String> columns = new HashMap<>();
         columns.put("name", name);
@@ -34,10 +50,26 @@ public class Assessment extends Model {
         super.create(columns);
     }
 
+    /**
+     * Creates a resource instance
+     * @param name Resource name
+     * @param mark Resource marks
+     * @param type_id Resource type
+     * @param semester_id Resource semester
+     * @throws SQLException
+     */
     public void create(String name, Integer mark, Integer type_id, Integer semester_id)  throws SQLException {
         this.create(name, mark.toString(), type_id.toString(), semester_id.toString());
     }
 
+    /**
+     * Query Assessments from a specific unit and semester
+     * @param unitID Unit ID
+     * @param semesterID Semester ID
+     * @param unitAssessment unit_assessment Model
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<HashMap<String, String>> whereUnitSemester(String unitID, String semesterID, UnitAssessment unitAssessment) throws SQLException {
         ArrayList<HashMap<String, String>> assessments = this.where("semester_id", semesterID.toString());
         ArrayList<HashMap<String, String>> units = unitAssessment.where("unit_id", unitID.toString());

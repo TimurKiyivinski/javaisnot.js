@@ -11,10 +11,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Type extends Model {
+    /**
+     * Resource Model for types
+     * @param verbose  Enable debugging
+     */
     Type(boolean verbose) {
         super(new ActiveRecordModel("types", Type.getColumns(), verbose));
     }
 
+    /**
+     * Gets all columns in resource
+     * @return Columns as a list
+     */
     static ArrayList<String> getColumns() {
         ArrayList<String> columns = new ArrayList<>();
         columns.add("id");
@@ -22,6 +30,11 @@ public class Type extends Model {
         return columns;
     }
 
+    /**
+     * Creates a resource instance
+     * @param name Resource name
+     * @throws SQLException
+     */
     public void create(String name) throws SQLException {
         HashMap<String, String> columns = new HashMap<>();
         columns.put("name", name);

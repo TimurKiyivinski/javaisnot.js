@@ -11,10 +11,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Semester extends Model {
+    /**
+     * Resource Model for semesters
+     * @param verbose  Enable debugging
+     */
     Semester(boolean verbose) {
         super(new ActiveRecordModel("semesters", Semester.getColumns(), verbose));
     }
 
+    /**
+     * Gets all columns in resource
+     * @return Columns as a list
+     */
     static ArrayList<String> getColumns() {
         ArrayList<String> columns = new ArrayList<>();
         columns.add("id");
@@ -22,6 +30,11 @@ public class Semester extends Model {
         return columns;
     }
 
+    /**
+     * Create a resource instance
+     * @param name Resource name
+     * @throws SQLException
+     */
     public void create(String name) throws SQLException {
         HashMap<String, String> columns = new HashMap<>();
         columns.put("name", name);
