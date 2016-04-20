@@ -45,7 +45,8 @@ public class Main {
     private static final int INPUT_UNITS_SEMESTER_REPORT = 3;
     private static final int INPUT_UNITS_SEMESTER_ADD = 4;
     private static final int INPUT_UNITS_SEMESTER_ASSIGN = 5;
-    private static final int INPUT_UNITS_SEMESTER_BACK = 6;
+    private static final int INPUT_UNITS_SEMESTER_LIST = 6;
+    private static final int INPUT_UNITS_SEMESTER_BACK = 7;
 
     private static final int INPUT_COURSES_CREATE = 1;
     private static final int INPUT_COURSES_VIEW = 2;
@@ -87,6 +88,7 @@ public class Main {
                 menu.add("Report");             // 3
                 menu.add("Add Student");        // 4
                 menu.add("Assign Student");     // 5
+                menu.add("List Assessments");   // 6
                 break;
             case MENU_COURSES:
                 menu.add("Create");             // 1
@@ -388,6 +390,10 @@ public class Main {
                                 else {
                                     studentAssessment.create(studentID, assessmentID);
                                 }
+                            }
+                            /* List all Assessments this Semester */
+                            else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_LIST) {
+                                myDisplay.printModel(assessment.whereUnitSemester(currentUnit, currentSemester, unitAssessment), Assessment.getColumns());
                             }
                             /* Return to Unit menu */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_BACK) {
