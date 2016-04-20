@@ -57,4 +57,9 @@ public abstract class Model {
     public ArrayList<HashMap<String, String>> delete(String key, String value) throws SQLException {
         return activeRecordModel.delete(key, value);
     }
+
+    public Integer last() throws SQLException {
+        ArrayList<HashMap<String, String>> lastInsert = activeRecordModel.last();
+        return Integer.parseInt(lastInsert.get(0).get("id"));
+    }
 }

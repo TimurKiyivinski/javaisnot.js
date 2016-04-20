@@ -78,7 +78,7 @@ public class Main {
             case MENU_UNITS:
                 menu.add("Create Unit");        // 1
                 menu.add("View");               // 2
-                menu.add("Semester");           // 3
+                menu.add("View Semester");      // 3
                 menu.add("Delete Unit");        // 4
                 break;
             case MENU_UNITS_SEMESTER:
@@ -160,6 +160,9 @@ public class Main {
             ArrayList<String> menuList;
             ArrayList<String> hierarchyList;
             String userInput;
+
+            String currentUnit = "";
+            String currentSemester = "";
 
             while (programRunning) {
                 try {
@@ -274,7 +277,21 @@ public class Main {
                             }
                             /* Navigate to Unit Semester menu */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER) {
-                                programMenu = MENU_UNITS_SEMESTER;
+                                myDisplay.printModel(unit.all(), Unit.getColumns());
+                                myDisplay.printQuestion("Unit ID:");
+                                String unitID = myInput.getInput();
+
+                                myDisplay.printModel(semester.all(), Semester.getColumns());
+                                myDisplay.printQuestion("Semester ID:");
+                                String semesterID = myInput.getInput();
+
+                                if (unit.find(unitID).isEmpty() || semester.find(semesterID).isEmpty())
+                                    myDisplay.printError("The specified unit or semester does not exist.");
+                                else {
+                                    programMenu = MENU_UNITS_SEMESTER;
+                                    currentUnit = unitID;
+                                    currentSemester = semesterID;
+                                }
                             }
                             /* Delete Unit */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_DELETE) {
@@ -299,7 +316,22 @@ public class Main {
                         case MENU_UNITS_SEMESTER:
                             /* Create Assessment under specific Semester */
                             if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_CREATE) {
-                                // TODO:
+                                myDisplay.printModel(type.all(), Type.getColumns());
+                                myDisplay.printQuestion("Assessment Type:");
+                                String typeID = myInput.getInput();
+
+                                myDisplay.printQuestion("Assessment Name:");
+                                String name = myInput.getInput();
+
+                                myDisplay.printQuestion("Assessment Marks:");
+                                String mark = myInput.getInput();
+
+                                if (type.find(typeID).isEmpty())
+                                    myDisplay.printError("The specified assessment type does not exist");
+                                else {
+                                    assessment.create(name, mark, typeID, currentSemester);
+                                    unitAsseessment.create(currentUnit, assessment.last().toString());
+                                }
                             }
                             /* Grade all Students based on an Assessment */
                             else if (Integer.parseInt(userInput) == INPUT_UNITS_SEMESTER_GRADE) {
